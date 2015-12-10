@@ -1,0 +1,17 @@
+<h1>Post View </h1>
+
+<p><strong>Post Title:</strong>
+  <%= @post.title %></p>
+
+<p><strong>Post Url:</strong>
+  <%= @post.url %> </p>
+
+<p><strong>Post Description:</strong>
+  <%= @post.description %> </p>
+
+<p><strong>Post Categories:</strong>
+  <ul>
+    <% @post.categories.each do |category| %>
+    <li><%= link_to category.name, "http://www.google.com?q=#{category.name}" %></li>
+    <% end %>
+  </ul>
