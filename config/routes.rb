@@ -6,4 +6,6 @@ PostitTemplate::Application.routes.draw do
   end
 
   resources :comments
+
+  resources :categories, only: ['index', 'show']
 end

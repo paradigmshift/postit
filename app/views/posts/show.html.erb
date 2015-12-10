@@ -12,6 +12,6 @@
 <p><strong>Post Categories:</strong>
   <ul>
     <% @post.categories.each do |category| %>
-    <li><%= link_to category.name, "http://www.google.com?q=#{category.name}" %></li>
+    <li><%= link_to category.name, category_path(category) %></li>
     <% end %>
   </ul>
