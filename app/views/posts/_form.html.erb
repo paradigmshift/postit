@@ -1,0 +1,32 @@
+<!-- <% if @post.errors.any? %> -->
+<!-- <div class="alert alert-warning"> -->
+<!--   <p><%= pluralize(@post.errors.size, 'error') %> found:</p> -->
+<!--   <ul> -->
+<!--     <% @post.errors.full_messages.each do |msg| %> -->
+<!--     <li><%= msg %></li> -->
+<!--     <% end %> -->
+<!--   </ul> -->
+<!-- </div> -->
+<!-- <% end %> -->
+
+<%= render 'layouts/error_messages', obj: @post %>
+
+<%= form_for @post do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+
+<br>
+<%= f.label :url %>
+<%= f.text_field :url %>
+<br>
+
+<%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+<% cb.label(class: "checkbox inline") {cb.check_box(class: "checkbox") + cb.text } %>
+<% end %>
+
+<br>
+<%= f.label :description %>
+<%= f.text_area :description%>
+<br>
+<%= f.submit(@post.new_record? ? 'Create New Post' : 'Update Post', class: 'btn btn-primary') %>
+<% end %>

@@ -1,17 +1,33 @@
-<h1>Post View </h1>
+<p class="pull-right">
+  [<%= link_to 'edit post', edit_post_path(@post) %>]
+</p>
 
-<p><strong>Post Title:</strong>
-  <%= @post.title %></p>
+<p>
+  <%= render @post.categories %>
+</p>
 
-<p><strong>Post Url:</strong>
-  <%= @post.url %> </p>
+<div class='well'>
+  <p class="lead" ><%= link_to @post.title, fix_url(@post.url) %></p>
 
-<p><strong>Post Description:</strong>
-  <%= @post.description %> </p>
+  <p>
+    <small>
+      <%= link_to "back to all posts", posts_path %>
+    </small>
+  </p>
 
-<p><strong>Post Categories:</strong>
-  <ul>
-    <% @post.categories.each do |category| %>
-    <li><%= link_to category.name, category_path(category) %></li>
-    <% end %>
-  </ul>
+  <p><strong><%= @post.description %></strong> </p>
+</div>
+
+<%= render 'layouts/error_messages', obj: @comment %>
+
+<%= render @post.comments %>
+
+<div class='well'>
+  <%= form_for [@post, @comment] do |f| %>
+  <div class='control-group'>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit "Post a comment", class: "btn btn-primary" %>
+  <% end %>
+</div>

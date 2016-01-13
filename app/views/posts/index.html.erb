@@ -1,12 +1,11 @@
-<h3>Welcome!</h3>
+<%= render 'layouts/content_title', title: "All Posts" %>
 
-<p>This is the Postit template. You've access the PostsController, index action. This is the index template. Find me under app/views/posts folder.</p>
+<%= form_tag("/search", :method => 'get') do %>
+<%= label_tag(:q, "Search for posts created by") %>
+<%= text_field_tag(:q) %>
+<%= submit_tag("Search") %>
+<% end %>
 
-<% if @posts %>
-<h3><%= @user.username %></h3>
-<ul>
-  <% @posts.each do |post| %>
-  <li><%= link_to post.title, post_path(post) %></li>
-  <% end %>
-</ul>
+<% @posts.each do |post| %>
+<%= render 'show_post', post: post %>
 <% end %>

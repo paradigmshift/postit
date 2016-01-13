@@ -1,0 +1,11 @@
+<div class="well">
+  <div class='control-group'>
+    <%= comment.body %>
+    <% if local_assigns[:display_post_title] %>
+    on <%= link_to Post.find(comment.post_id).title, post_path(Post.find(comment.post_id)) %>
+    <% end %>
+  </div>
+  <div class='control-group'>
+    <span class='quiet'> by <%=link_to comment.creator.username, comment.creator %> at <%= comment.created_at %> </span>
+  </div>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206094541) do
+ActiveRecord::Schema.define(version: 20160113215354) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20151206094541) do
   end
 
   create_table "comments", force: true do |t|
-    t.text    "body"
-    t.integer "user_id"
-    t.integer "post_id"
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "post_categories", force: true do |t|
@@ -33,14 +35,17 @@ ActiveRecord::Schema.define(version: 20151206094541) do
   end
 
   create_table "posts", force: true do |t|
-    t.string  "title"
-    t.string  "url"
-    t.text    "description"
-    t.integer "user_id"
+    t.string   "title"
+    t.string   "url"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string "username"
+    t.string "password_digest"
   end
 
 end
