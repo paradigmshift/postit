@@ -10,6 +10,12 @@ class CommentsController < ApplicationController
     else
       render 'posts/show'
     end
+  end
 
- end
+  def vote
+    @comment = Comment.find(params[:id])
+    @vote = Vote.create(vote: params[:vote], user_id: current_user.id, voteable: @comment)
+    flash[:error] = "Cannot vote twice!" if !@vote.valid?
+    redirect_to :back
+  end
 end

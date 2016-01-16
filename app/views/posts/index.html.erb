@@ -1,11 +1,5 @@
 <%= render 'layouts/content_title', title: "All Posts" %>
 
-<%= form_tag("/search", :method => 'get') do %>
-<%= label_tag(:q, "Search for posts created by") %>
-<%= text_field_tag(:q) %>
-<%= submit_tag("Search") %>
-<% end %>
-
 <% @posts.each do |post| %>
 <%= render 'show_post', post: post %>
 <% end %>

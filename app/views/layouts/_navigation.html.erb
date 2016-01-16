@@ -40,9 +40,9 @@
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><%= link_to "edit profile", edit_user_path(current_user) %></li>
-      <li><%= link_to "view profile", user_path(current_user) %></li>
-      <li><%= link_to "Logout", logout_path %></li>
+      <li><%= link_to "<i class='icon-pencil'></i> edit profile".html_safe, edit_user_path(current_user) %></li>
+      <li><%= link_to "<i class='icon-user'></i> view profile".html_safe, user_path(current_user) %></li>
+      <li><%= link_to "<i class='icon-circle-arrow-left'></i> logout".html_safe, logout_path %></li>
     </ul>
   </div>
 </div>

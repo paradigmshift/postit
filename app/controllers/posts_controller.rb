@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
 
   def index
@@ -30,13 +30,18 @@ class PostsController < ApplicationController
   end
 
   def update
-    binding.pry
     if @post.update(post_params)
       flash[:notice] = "Your post was updated"
       redirect_to post_path(@post)
     else
       render :edit
     end
+  end
+
+  def vote
+    @vote = Vote.create(vote: params[:vote], user_id: current_user.id, voteable: @post)
+    flash[:error] = "Cannot vote twice!" if !@vote.valid?
+    redirect_to :back
   end
 
   private

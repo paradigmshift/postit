@@ -22,12 +22,14 @@
 
 <%= render @post.comments %>
 
-<div class='well'>
-  <%= form_for [@post, @comment] do |f| %>
-  <div class='control-group'>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+<div class='row'>
+  <div class='span8 well'>
+    <%= form_for [@post, @comment] do |f| %>
+    <div class='control-group'>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+    </div>
+    <%= f.submit "Post a comment", class: "btn btn-primary" %>
+    <% end %>
   </div>
-  <%= f.submit "Post a comment", class: "btn btn-primary" %>
-  <% end %>
 </div>

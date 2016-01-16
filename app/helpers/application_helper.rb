@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def display_dt(dt)
-    dt.strftime("%d/%m/%Y %l:%M:%P %Z")
+    dt.localtime.strftime("%d/%m/%Y %l:%M:%P UTC %z")
   end
 
   def display_zone(dt)
