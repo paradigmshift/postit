@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    redirect_to post_path(@post) if current_user != @post.creator
   end
 
   def create
@@ -30,10 +31,11 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    if @post.update(post_params) && current_user == @post.creator
       flash[:notice] = "Your post was updated"
       redirect_to post_path(@post)
     else
+      flash[:error] = "You can only edit your own posts!"
       render :edit
     end
   end

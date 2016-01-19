@@ -1,3 +1,4 @@
+<% if !comment.id.nil? %>
 <div class='row'>
   <div class='span0 well center-text'>
     <%= link_to vote_post_comment_path(id: comment.id, post_id: comment.post_id, vote: true), method: 'post' do %>
@@ -22,3 +23,4 @@
     </div>
   </div>
 </div>
+<% end %>
