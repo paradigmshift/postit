@@ -1,13 +1,13 @@
 <% if !comment.id.nil? %>
 <div class='row'>
   <div class='span0 well center-text'>
-    <%= link_to vote_post_comment_path(id: comment.id, post_id: comment.post_id, vote: true), method: 'post' do %>
+    <%= link_to vote_post_comment_path(comment.post_id, comment, vote: true), method: 'post' do %>
     <i class='icon-arrow-up'></i>
     <% end %>
     <br>
     <%= comment.total_votes %>
     <br>
-    <%= link_to vote_post_comment_path(id: comment.id, post_id: comment.post_id, vote: false), method: 'post' do %>
+    <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
     <i class='icon-arrow-down'></i>
     <% end %>
   </div>
