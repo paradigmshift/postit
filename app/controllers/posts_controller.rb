@@ -43,7 +43,11 @@ class PostsController < ApplicationController
   def vote
     @vote = Vote.create(vote: params[:vote], user_id: current_user.id, voteable: @post)
     flash[:error] = "Cannot vote twice!" if !@vote.valid?
-    redirect_to :back
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
   end
 
   private
