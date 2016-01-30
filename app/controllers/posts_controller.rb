@@ -59,11 +59,4 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find_by(slug: params[:id])
   end
-
-  def require_user
-    if !logged_in?
-      flash[:error] = "You are not logged in!"
-      redirect_to login_path
-    end
-  end
 end
