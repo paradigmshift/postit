@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :categories, through: :post_categories
   has_many :votes, as: :voteable
 
-  after_validation :generate_slug
+  before_save :generate_slug
 
   validates :title, presence: true
   validates :url, presence: true
@@ -23,7 +23,21 @@ class Post < ActiveRecord::Base
   end
 
   def generate_slug
-    self.slug = self.title.gsub(' ', '-').downcase
+    self.slug = self.title.gsub(/\W/, '-').gsub(/-{2,}/, '-').downcase.strip
+    self.slug = append_suffix(self.slug)
+  end
+
+  def append_suffix(str)
+    counter = 2
+    post = Post.find_by(slug: str)
+    while post && post != self
+      # if last character is an integer remove it from the slug
+      str = str.split("-").slice(0...-1).join("-") if str.split("-").last.to_i != 0
+      str.concat("-#{counter}")
+      post = Post.find_by(slug: str)
+      counter += 1
+    end
+    str
   end
 
   def to_param
