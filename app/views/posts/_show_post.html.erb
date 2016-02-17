@@ -1,4 +1,10 @@
 <div class='row'>
+
+  <div class ='alert alert-error' id= 'post_vote_error_<%= post.to_param %>' style='display: none'>
+      <a class="close" data-dismiss="alert">&#215;</a>
+    You can only vote once!
+  </div>
+
   <div class='span0 well center-text'>
     <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
     <i class='icon-arrow-up'></i>
