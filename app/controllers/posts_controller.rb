@@ -8,6 +8,12 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @post}
+      format.json { render json: @post}
+    end
   end
 
   def new
@@ -15,7 +21,21 @@ class PostsController < ApplicationController
   end
 
   def edit
-    redirect_to post_path(@post) if current_user != @post.creator
+    @post = Post.find_by(slug: params[:id])
+    if !current_user.admin?
+      if current_user != @post.creator
+        @comment = Comment.new
+        respond_to do |format|
+          format.html do
+            flash[:error] = "You can only edit your own posts!"
+            render 'show'
+          end
+
+          format.js { render 'show'}
+
+        end
+      end
+    end
   end
 
   def create

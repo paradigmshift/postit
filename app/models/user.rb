@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Sluggable
+
   has_many :posts
   has_many :comments
   has_many :votes
@@ -8,18 +10,21 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, on: :create, length: {minimum: 3}
 
-  before_save :generate_slug
-
   def admin?
     self.role.to_s == 'admin'
   end
 
-  def generate_slug
-    self.slug = self.username.gsub(/\W/, '-').gsub(/-{2,}/, '-').downcase.strip
+  def two_factor_auth
+    !self.phone.blank?
   end
 
-  def to_param
-    self.slug
+  def generate_pin!
+    self.update_column(:pin, rand(10 ** 6))
   end
 
+  def destroy_pin!
+    self.update_column(:pin, nil)
+  end
+
+  sluggable_column :username
 end

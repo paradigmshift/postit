@@ -4,10 +4,12 @@ module ApplicationHelper
   end
 
   def display_dt(dt)
-    dt.localtime.strftime("%d/%m/%Y %l:%M:%P UTC %z")
+    if logged_in?
+      dt.in_time_zone(current_user.time_zone).strftime("%d/%m/%Y %l:%M:%P ")
+    else
+
+      dt.strftime("%d/%m/%Y %l:%M:%P UTC")
+    end
   end
 
-  def display_zone(dt)
-    dt.localtime.strftime("%Z")
-  end
 end

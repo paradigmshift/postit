@@ -29,12 +29,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
 
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      render 'edit'
+    end
   end
 
   private
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :time_zone, :phone)
   end
 end
