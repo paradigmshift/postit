@@ -12,4 +12,6 @@ module ApplicationHelper
     end
   end
 
+  OFFSET = 10
+
 end

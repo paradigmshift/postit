@@ -3,3 +3,27 @@
 <% @posts.each do |post| %>
 <%= render 'show_post', post: post %>
 <% end %>
+
+<div class="pagination pagination-large">
+<nav>
+  <ul class="pagination-lg">
+    <li class="page-item">
+      <%= link_to posts_path(offset: params[:offset].to_i - 1) do %>
+      <span aria-hidden="true">&laquo;</span>
+      <% end %>
+    </li>
+    <% (@pages.to_f/ApplicationHelper::OFFSET).ceil.times do |n| %>
+      <% if n.to_s == params[:offset].to_s || n == 0 && params[:offset] == nil %>
+        <li class="page-item active "><span><%= "#{n+1}" %></span></li>
+      <% else %>
+        <li class="page-item"><%= link_to "#{n+1}", posts_path(offset: n) %></li>
+      <% end %>
+    <% end %>
+    <li class="page-item">
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>

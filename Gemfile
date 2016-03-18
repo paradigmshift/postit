@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '=3.0.1'
+gem 'twilio-ruby'
 #gem 'voteable_mo', path: '/home/mo/dev/ruby/voteable-gem/'
 
 group :doc do

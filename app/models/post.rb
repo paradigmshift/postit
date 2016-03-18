@@ -11,4 +11,6 @@ class Post < ActiveRecord::Base
   validates :url, presence: true
 
   sluggable_column :title
+
+  default_scope { order(updated_at: :desc)}
 end
