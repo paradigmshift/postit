@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_user, except: [:index, :show]
 
   def index
-    @posts = Post.all.offset(params[:offset] ||= 0 * ApplicationHelper::OFFSET).limit(ApplicationHelper::OFFSET)
+    @posts = Post.all.offset(params[:offset].to_i * ApplicationHelper::OFFSET ||= 0).limit(ApplicationHelper::OFFSET)
     @pages = Post.all.size
   end
 
