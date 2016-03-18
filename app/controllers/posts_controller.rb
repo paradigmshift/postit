@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.offset(params[:offset].to_i * ApplicationHelper::OFFSET ||= 0).limit(ApplicationHelper::OFFSET)
+    @popular = @posts.sort { |x,y|  y.total_votes <=> x.total_votes  }
     @pages = Post.all.size
   end
 
